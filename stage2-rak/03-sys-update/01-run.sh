@@ -37,6 +37,11 @@ EOL
 cp files/update-motd.d/* "${ROOTFS_DIR}/etc/update-motd.d/"
 rm -rf "${ROOTFS_DIR}/etc/update-motd.d/10-uname"
 
+# Force user to change password after first login
+on_chroot << EOF
+passwd -e $FIRST_USER_NAME
+EOF
+
 # Set wwan0 to raw IP mode when using BG96
 cp files/wwan0.sh "${ROOTFS_DIR}/etc/NetworkManager/dispatcher.d/pre-up.d/"
 
