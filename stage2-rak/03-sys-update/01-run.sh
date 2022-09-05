@@ -40,6 +40,7 @@ rm -rf "${ROOTFS_DIR}/etc/update-motd.d/10-uname"
 # Force user to change password after first login
 on_chroot << EOF
 passwd -e $FIRST_USER_NAME
+echo "rak ALL=(ALL) PASSWD: ALL" > /etc/sudoers.d/010_pi-nopasswd
 EOF
 
 # Set wwan0 to raw IP mode when using BG96
